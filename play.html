@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Playing Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      background: #121212;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background: #222;
+    }
+
+    .top-bar button {
+      padding: 8px 14px;
+      background: #4caf50;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    #gameFrame {
+      width: 100%;
+      height: calc(100vh - 50px);
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="top-bar">
+  <button onclick="goHome()">← Home</button>
+  <button onclick="goFullscreen()">Fullscreen</button>
+</div>
+
+<iframe id="gameFrame"></iframe>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const gamePath = params.get("game");
+
+  if (!gamePath) {
+    alert("No game selected!");
+    window.location.href = "index.html";
+  } else {
+    document.getElementById("gameFrame").src = gamePath;
+  }
+
+  function goHome() {
+    window.location.href = "index.html";
+  }
+
+  function goFullscreen() {
+    const iframe = document.getElementById("gameFrame");
+    if (iframe.requestFullscreen) {
+      iframe.requestFullscreen();
+    }
+  }
+</script>
+
+</body>
+</html>
